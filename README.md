@@ -4,6 +4,8 @@
 
 교실: https://riedle03.github.io/muse-ai-imaginary-lab/
 
+초·중·고 본 프로그램(12차시): https://riedle03.github.io/muse-ai-imaginary-lab/school/
+
 로컬: `python -m http.server 8765` 후 http://127.0.0.1:8765
 
 ## 동선
