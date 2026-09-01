@@ -48,8 +48,11 @@ body {
   background: var(--paper);
   color: var(--ink);
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 .grain { display: none; }
+body > section { width: 100%; min-width: 0; }
 .top {
   display: flex;
   justify-content: space-between;
@@ -331,14 +334,21 @@ button {
 .grade-q { min-height: 3.2em; font-size: 14px; }
 .stamp { font-family: var(--mono); font-size: 11px; color: var(--brass-dim); }
 .foot {
-  padding: 16px 24px 32px;
+  margin-top: auto;
+  padding: 18px 24px 28px;
   color: var(--mist);
   font-size: 16px;
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
+  background: var(--card);
+  border-top: 2px solid var(--ink);
 }
-.foot .pet { width: 40px; height: 56px; object-fit: contain; }
+.foot .pet { width: 40px; height: 56px; object-fit: contain; flex-shrink: 0; }
+.foot .who { display: grid; gap: 2px; }
+.foot strong { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; }
+.foot .org { margin: 0; font-size: 16px; font-weight: 700; color: var(--ink); }
+.foot small { color: var(--mist); font-size: 14px; font-weight: 600; }
 .hidden { display: none !important; }
 
 .rush-wrap { display: grid; gap: 12px; justify-items: center; }
