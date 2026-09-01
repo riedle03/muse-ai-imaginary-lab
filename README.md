@@ -2,7 +2,8 @@
 
 국립중앙과학관 IMAGINARY 키오스크 4게임을 **체험 → 수업 → 학습지 → 산출**까지 한 웹앱에서 돌립니다. 안내 영상 5편과 한글 학습지·지도안이 같이 있습니다.
 
-교실: https://riedle03.github.io/muse-ai-imaginary-lab/
+교실: https://muse-ai-imaginary-lab.vercel.app/  
+(GitHub Pages 백업: https://riedle03.github.io/muse-ai-imaginary-lab/)
 
 3차시: `#ask` 질문하기(레드카드) → `#inquire` 탐구하기(미터) → `#write` 쓰기(종이 3장). 사진 IMG_8957–8968.
 
