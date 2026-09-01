@@ -70,8 +70,8 @@ body {
   text-decoration: none;
 }
 .brand img.pet-mark {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 56px;
   object-fit: contain;
 }
 .ticket { display: none; }
@@ -101,8 +101,8 @@ body {
   background: linear-gradient(180deg, var(--cyan-soft), var(--card));
 }
 .hero-copy .pet {
-  width: 88px;
-  height: 88px;
+  width: 120px;
+  height: 180px;
   object-fit: contain;
 }
 .hero-copy .eyebrow { margin: 0; font-weight: 700; color: var(--cyan); font-size: 16px; }
@@ -338,7 +338,7 @@ button {
   gap: 12px;
   align-items: center;
 }
-.foot .pet { width: 44px; height: 44px; object-fit: contain; }
+.foot .pet { width: 40px; height: 56px; object-fit: contain; }
 .hidden { display: none !important; }
 
 .rush-wrap { display: grid; gap: 12px; justify-items: center; }
