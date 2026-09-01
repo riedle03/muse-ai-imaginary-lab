@@ -3,30 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>이매지너리 수학 실험실 · 고등</title>
+    <title>이매지너리 수학놀이</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/app.css" />
   </head>
   <body data-view="hub">
     <div class="grain no-print" aria-hidden="true"></div>
     <header class="top no-print">
       <a class="brand" href="#hub" id="to-hub">
-        <span class="ticket">실</span>
+        <img class="pet-mark" src="assets/pet.png" alt="" width="48" height="48" />
         <span>
-          <strong>이매지너리 수학 실험실</strong>
-          <small>질문하기 · 탐구하기 · 쓰기</small>
+          <strong>이매지너리 수학놀이</strong>
+          <small>질문 · 세기 · 쓰기</small>
         </span>
       </a>
-      <nav class="main-nav" aria-label="앱 구역">
+      <nav class="main-nav" aria-label="수업 걸음">
         <a href="#hub">처음</a>
-        <a href="#ask">질문하기</a>
-        <a href="#inquire">탐구하기</a>
-        <a href="#write">쓰기</a>
+        <a href="#ask">1 질문</a>
+        <a href="#inquire">2 세기</a>
+        <a href="#write">3 쓰기</a>
         <a href="#guide">지도안</a>
       </nav>
       <div class="top-right">
@@ -35,11 +33,40 @@
     </header>
 
     <section id="hub" class="hub">
-      <p class="hall-kicker">
-        국립중앙과학관 이매지너리 키오스크입니다. <strong>질문하기</strong>에서 모둠 탐구질문을 레드카드에 남기고,
-        <strong>탐구하기</strong>에서 고른 게임을 미터로 세고, <strong>쓰기</strong>는 종이 3장입니다.
-        과학관에 못 가도 웹앱만으로 3차시가 됩니다.
-      </p>
+      <div class="hero">
+        <img class="hero-photo" src="assets/hero.jpg" alt="네 가지 수학 놀이 탁자가 있는 밝은 교실" />
+        <div class="hero-copy">
+          <img class="pet" src="assets/pet-wave.png" alt="유리 구슬 친구 미지" />
+          <p class="eyebrow">국립중앙과학관 · 이매지너리</p>
+          <h1>질문하고, 세고, 씁니다</h1>
+          <p>초등도 중등도 고등도 같은 세 걸음입니다. 깨는 게임이 아니라, 숫자를 세는 놀이입니다.</p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#ask">1. 질문 남기기</a>
+            <a class="btn" href="#inquire">2. 게임으로 세기</a>
+          </div>
+        </div>
+      </div>
+      <ol class="path">
+        <li>
+          <span class="n" aria-hidden="true">1</span>
+          <strong>질문 남기기</strong>
+          <p>내 질문을 쓰고, 모둠이 한 줄을 고릅니다.</p>
+          <a href="#ask">레드카드 만들기</a>
+        </li>
+        <li>
+          <span class="n" aria-hidden="true">2</span>
+          <strong>게임으로 세기</strong>
+          <p>네 놀이 중 하나만. 미터에 나온 숫자를 적습니다.</p>
+          <a href="#inquire">탐구 보드 열기</a>
+        </li>
+        <li>
+          <span class="n" aria-hidden="true">3</span>
+          <strong>종이로 쓰기</strong>
+          <p>질문, 잰 숫자, 한 문장. 종이에 적습니다.</p>
+          <a href="#write">활동지 열기</a>
+        </li>
+      </ol>
+      <h2 class="block-title">놀이 네 가지</h2>
       <div id="cards" class="stations"></div>
     </section>
 
@@ -53,7 +80,7 @@
             <button type="button" id="btn-reset">보드 처음</button>
             <button type="button" id="btn-hint" hidden>힌트</button>
             <a id="to-lesson" class="ghost" hidden>이 판으로 수업</a>
-            <a id="to-sheet" class="ghost">학습지</a>
+            <a id="to-sheet" class="ghost">쓰기로</a>
           </div>
         </div>
         <p id="meter" class="meter no-print">—</p>
@@ -99,7 +126,8 @@
     </section>
 
     <footer class="foot no-print">
-      MUSE-AI · 질문하기 → 탐구하기 → 쓰기 · 보드는 1차 자료
+      <img class="pet" src="assets/pet.png" alt="" />
+      <span>미지와 함께 · 질문하고 세고 쓰기 · 보드는 1차 자료</span>
     </footer>
     <script type="module" src="./js/main.js"></script>
   </body>

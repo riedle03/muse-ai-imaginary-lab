@@ -45,28 +45,6 @@ function show(view) {
 
 function renderHub() {
   const card = loadCard();
-  const periods = `
-    <article class="station">
-      <span class="st-no">1차시</span>
-      <strong>질문하기</strong>
-      <em>개인 질문 → 모둠 확정 → 레드카드</em>
-      <p>카드에는 탐구질문 한 줄만 남습니다.${card.id ? ` 지금 카드 ${card.id}` : ""}</p>
-      <div class="cta-row"><a href="#ask">레드카드 만들기</a></div>
-    </article>
-    <article class="station">
-      <span class="st-no">2차시</span>
-      <strong>탐구하기</strong>
-      <em>고른 게임을 미터로 센다</em>
-      <p>깨기가 목적이 아닙니다. 교실 웹앱만으로도 됩니다.</p>
-      <div class="cta-row"><a href="#inquire">탐구 보드</a></div>
-    </article>
-    <article class="station">
-      <span class="st-no">3차시</span>
-      <strong>쓰기</strong>
-      <em>종이 활동지 3장</em>
-      <p>질문 · 잰 숫자 · 한 문장. 인쇄하세요.</p>
-      <div class="cta-row"><a href="#write">활동지 열기</a></div>
-    </article>`;
   const games = listModules()
     .map(
       (m) => `
@@ -76,13 +54,15 @@ function renderHub() {
         <strong>${m.title}</strong>
         <em>${m.concept}</em>
         <div class="cta-row">
-          <a href="#free/${m.id}">체험</a>
-          <a href="#inquire/${m.id}">이 게임으로 탐구</a>
+          <a href="#free/${m.id}">해 보기</a>
+          <a class="primary" href="#inquire/${m.id}">이걸로 세기</a>
         </div>
       </article>`
     )
     .join("");
-  document.querySelector("#cards").innerHTML = periods + games;
+  document.querySelector("#cards").innerHTML = games;
+  const pathHint = document.querySelector(".path li:first-child p");
+  if (pathHint && card.id) pathHint.textContent = `지금 카드 ${card.id}. 모둠 질문을 한 줄로 남깁니다.`;
 }
 
 function openPlay(id, lesson) {

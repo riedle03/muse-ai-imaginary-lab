@@ -41,32 +41,32 @@ export function renderAsk(root, onIssued) {
   const c = loadCard();
   root.innerHTML = `
     <article class="a4 red-sheet">
-      <p class="meta">1차시 · 질문하기</p>
-      <h1>탐구질문 만들고 레드카드</h1>
-      <p>개인이 질문을 쓰고, 모둠이 하나 고르고, 아래에서 카드를 만듭니다. 카드에는 탐구질문 한 줄만 남습니다.</p>
-      <label>모둠 <input id="rc-group" value="${c.group}" /></label>
-      <label>이름 <input id="rc-names" value="${c.names}" /></label>
-      <label>나의 탐구질문
+      <p class="meta">1걸음 · 질문 남기기</p>
+      <h1>질문을 한 줄로 남깁니다</h1>
+      <p>먼저 나만의 질문을 씁니다. 모둠이 하나를 고르면, 그 한 줄이 레드카드가 됩니다.</p>
+      <label>모둠 이름 <input id="rc-group" value="${c.group}" /></label>
+      <label>내 이름 <input id="rc-names" value="${c.names}" /></label>
+      <label>내가 만든 질문
         <textarea id="rc-mine" rows="3">${c.mine}</textarea>
       </label>
-      <label>이 질문을 만든 이유
+      <label>왜 이 질문인가요
         <textarea id="rc-why" rows="2">${c.why}</textarea>
       </label>
-      <label>모둠이 고른 탐구질문
+      <label>모둠이 고른 질문 (한 줄)
         <textarea id="rc-picked" rows="3">${c.picked}</textarea>
       </label>
-      <label>탐구할 게임
+      <label>오늘 셀 놀이
         <select id="rc-game">${GAMES.map((g) => `<option value="${g.id}" ${c.game === g.id ? "selected" : ""}>${g.title}</option>`).join("")}</select>
       </label>
-      <label>오늘 탐구 장소
+      <label>어디서 하나요
         <select id="rc-where">
-          <option value="web" ${c.where === "web" ? "selected" : ""}>웹앱</option>
+          <option value="web" ${c.where === "web" ? "selected" : ""}>이 화면 (웹앱)</option>
           <option value="kiosk" ${c.where === "kiosk" ? "selected" : ""}>과학관 키오스크</option>
         </select>
       </label>
-      <p class="card-id">카드 ID: <strong id="rc-id">${c.id || "아직 없음"}</strong></p>
+      <p class="card-id">카드 번호: <strong id="rc-id">${c.id || "아직 없음"}</strong></p>
       <button type="button" class="next" id="rc-make">레드카드 만들기</button>
-      <p class="hint-mute">만든 뒤에는 탐구하기에서 이 게임과 미터를 엽니다.</p>
+      <p class="hint-mute">카드를 만들면 2걸음에서 그 놀이의 미터를 셉니다.</p>
     </article>
   `;
   const read = () => ({
