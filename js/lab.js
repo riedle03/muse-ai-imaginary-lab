@@ -107,6 +107,8 @@ export function createLab({ root, stepsEl, meterEl, hintBtn }) {
     return `<label>${field.label}<textarea data-field="${field.id}" rows="3" placeholder="${field.placeholder || ""}">${saved}</textarea></label>`;
   };
 
+  let skipTask = false;
+
   const renderStep = () => {
     const mod = MODULES[moduleId];
     const spec = mod[step];
@@ -131,7 +133,8 @@ export function createLab({ root, stepsEl, meterEl, hintBtn }) {
         <p class="fail" hidden></p>
         <button type="button" class="next">형식화로</button>
       `;
-      session?.applyTask?.(spec.task);
+      if (!skipTask) session?.applyTask?.(spec.task);
+      skipTask = false;
     } else if (step === "formalize") {
       root.innerHTML = `
         <h2>형식화</h2>
@@ -248,7 +251,10 @@ export function createLab({ root, stepsEl, meterEl, hintBtn }) {
       teacher = v;
       sessionStorage.setItem("muse-ai-teacher", v ? "1" : "0");
       if (hintBtn) hintBtn.hidden = !v;
-      if (moduleId) renderStep();
+      if (moduleId) {
+        skipTask = true;
+        renderStep();
+      }
     },
     isTeacher: () => teacher,
     attach(id, gameSession) {
@@ -260,6 +266,7 @@ export function createLab({ root, stepsEl, meterEl, hintBtn }) {
       unlocked = new Set(saved?.unlocked || ["goal"]);
       lastState = gameSession.getState?.() || {};
       if (hintBtn) hintBtn.hidden = !teacher;
+      skipTask = true;
       bindSteps();
       renderStep();
       renderMeter();

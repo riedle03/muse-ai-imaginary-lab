@@ -18,18 +18,18 @@
         <img class="pet-mark" src="assets/pet.png" alt="" width="48" height="48" />
         <span>
           <strong>이매지너리 수학놀이</strong>
-          <small>질문 · 세기 · 쓰기</small>
+          <small>질문하기 · 탐구하기 · 쓰기</small>
         </span>
       </a>
       <nav class="main-nav" aria-label="수업 걸음">
         <a href="#hub">처음</a>
-        <a href="#ask">1 질문</a>
-        <a href="#inquire">2 세기</a>
-        <a href="#write">3 쓰기</a>
+        <a href="#ask">질문하기</a>
+        <a href="#inquire">탐구하기</a>
+        <a href="#write">쓰기</a>
         <a class="teacher-only" href="#guide">지도안</a>
       </nav>
       <div class="top-right">
-        <button type="button" id="teacher" class="ghost">교사</button>
+        <button type="button" id="teacher" class="ghost" aria-pressed="false">교사</button>
       </div>
     </header>
 
@@ -50,21 +50,21 @@
       <ol class="path">
         <li>
           <span class="n" aria-hidden="true">1</span>
-          <strong>질문 남기기</strong>
+          <strong>질문하기</strong>
           <p>내 질문을 쓰고, 모둠이 한 줄을 고릅니다.</p>
-          <a href="#ask">레드카드 만들기</a>
+          <a href="#ask">카드 만들기</a>
         </li>
         <li>
           <span class="n" aria-hidden="true">2</span>
-          <strong>게임으로 세기</strong>
+          <strong>탐구하기</strong>
           <p>네 놀이 중 하나만. 미터에 나온 숫자를 적습니다.</p>
-          <a href="#inquire">탐구 보드 열기</a>
+          <a href="#inquire">세러 가기</a>
         </li>
         <li>
           <span class="n" aria-hidden="true">3</span>
-          <strong>종이로 쓰기</strong>
+          <strong>쓰기</strong>
           <p>질문, 잰 숫자, 한 문장. 종이에 적습니다.</p>
-          <a href="#write">활동지 열기</a>
+          <a href="#write">종이 열기</a>
         </li>
       </ol>
       <h2 class="block-title">오늘 셀 게임, 하나만</h2>
@@ -73,20 +73,20 @@
 
     <section id="play" class="play lab-play" hidden>
       <div class="stage-col">
-        <p id="mode-tag" class="mode-tag no-print">수업</p>
-        <nav id="lab-steps" class="lab-steps no-print" aria-label="수업 단계"></nav>
+        <p id="mode-tag" class="mode-tag no-print">세기</p>
+        <p id="ask-strip" class="ask-strip no-print" hidden></p>
+        <p id="meter" class="meter no-print">—</p>
         <div class="hud no-print">
           <p id="stat">—</p>
           <div class="hud-actions">
-            <button type="button" id="btn-reset">보드 처음</button>
+            <button type="button" id="btn-reset">처음부터</button>
             <button type="button" id="btn-hint" hidden>힌트</button>
-            <a id="to-lesson" class="ghost" hidden>이 판으로 수업</a>
+            <a id="to-lesson" class="ghost" hidden>이걸로 세기</a>
             <a id="to-sheet" class="ghost">쓰기로</a>
           </div>
         </div>
-        <p id="ask-strip" class="ask-strip no-print" hidden></p>
-        <p id="meter" class="meter no-print">—</p>
         <div id="stage" class="stage"></div>
+        <nav id="lab-steps" class="lab-steps no-print" aria-label="수업 단계"></nav>
       </div>
       <aside class="plaque lab no-print" id="lab-body"></aside>
     </section>

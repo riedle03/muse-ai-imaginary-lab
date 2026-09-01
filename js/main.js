@@ -58,7 +58,7 @@ function renderHub() {
       <article class="station station-card">
         <span class="mini mini-${m.id === "fifteen" ? "fif" : m.id === "sudoku" ? "sdk" : m.id === "solitaire" ? "sol" : "rush"}"></span>
         <strong>${m.title}</strong>
-        <em>${BOARD_LINE[m.id] || m.concept}</em>
+        <em>${BOARD_LINE[m.id] || ""}</em>
         <div class="cta-row">
           <a href="#free/${m.id}">규칙만</a>
           <a class="primary" href="#inquire/${m.id}">이걸로 세기</a>
@@ -71,11 +71,14 @@ function renderHub() {
   if (pathHint && card.id) pathHint.textContent = `지금 카드 ${card.id}. 모둠 질문을 한 줄로 남깁니다.`;
 }
 
+let labAttached = false;
+
 function applyTeacherChrome() {
   const teacher = lab.isTeacher();
   const lesson = current.view === "lesson";
   document.body.classList.toggle("is-teacher", teacher);
-  document.body.classList.toggle("is-free", !lesson || !teacher);
+  document.body.classList.toggle("is-inquire", lesson);
+  document.body.classList.toggle("is-free", current.view === "free");
   labSteps.hidden = !lesson || !teacher;
   labAside.hidden = !lesson || !teacher;
   const hint = document.querySelector("#btn-hint");
@@ -92,12 +95,16 @@ function applyTeacherChrome() {
       strip.hidden = true;
     }
   }
-  if (lesson && teacher && session) lab.attach(current.id, session);
+  if (lesson && teacher && session && !labAttached) {
+    lab.attach(current.id, session);
+    labAttached = true;
+  }
 }
 
 function openPlay(id, lesson) {
   if (!mounts[id]) return;
   session?.destroy();
+  labAttached = false;
   current = { view: lesson ? "lesson" : "free", id };
   show("play");
   const q = loadCard();
@@ -155,6 +162,8 @@ function openWrite() {
   session = null;
   current = { view: "write", id: "" };
   show("sheet");
+  const sel = document.querySelector("#sheet-mod");
+  if (sel) sel.hidden = true;
   renderCycleSheets(document.querySelector("#sheet-root"));
 }
 
@@ -266,10 +275,10 @@ document.querySelector("#teacher")?.addEventListener("click", () => {
   const next = !lab.isTeacher();
   lab.setTeacher(next);
   document.querySelector("#teacher").classList.toggle("is-on", next);
-  document.querySelector("#teacher").textContent = next ? "교사 잠금 해제됨" : "교사";
+  document.querySelector("#teacher").textContent = "교사";
+  document.querySelector("#teacher").setAttribute("aria-pressed", next ? "true" : "false");
   applyTeacherChrome();
 });
-lab.setTeacher(false);
 
 document.querySelector("#sheet-mod")?.addEventListener("change", (e) => {
   location.hash = `sheet/${e.target.value}`;
@@ -295,3 +304,6 @@ document.querySelector("#film-play")?.addEventListener("click", () => {
 renderHub();
 window.addEventListener("hashchange", route);
 route();
+document.querySelector("#teacher")?.classList.toggle("is-on", lab.isTeacher());
+document.querySelector("#teacher")?.setAttribute("aria-pressed", lab.isTeacher() ? "true" : "false");
+applyTeacherChrome();

@@ -88,6 +88,15 @@ export function renderAsk(root, onIssued) {
     if (!next.id) next.id = issueId();
     saveCard(next);
     root.querySelector("#rc-id").textContent = next.id;
+    let go = root.querySelector("#rc-go");
+    if (!go) {
+      go = document.createElement("a");
+      go.id = "rc-go";
+      go.className = "btn primary";
+      go.textContent = "세러 가기";
+      root.querySelector("#rc-make").after(go);
+    }
+    go.href = `#inquire/${next.game}`;
     onIssued?.(next);
   });
 }

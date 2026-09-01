@@ -250,8 +250,11 @@ body {
 [hidden] { display: none !important; }
 body[data-view="hub"] .play { display: none !important; }
 body[data-view="play"] .hub { display: none !important; }
-body.is-free .play { grid-template-columns: 1fr; }
-body.is-free .lab, body.is-free .lab-steps { display: none !important; }
+body.is-free .play,
+body.is-inquire:not(.is-teacher) .play { grid-template-columns: 1fr; }
+body.is-free .lab, body.is-free .lab-steps,
+body:not(.is-teacher) #lab-steps,
+body:not(.is-teacher) #lab-body { display: none !important; }
 .play {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
