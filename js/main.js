@@ -61,7 +61,7 @@ function renderHub() {
         <em>${BOARD_LINE[m.id] || ""}</em>
         <div class="cta-row">
           <a href="#free/${m.id}">규칙만</a>
-          <a class="primary" href="#inquire/${m.id}">이걸로 세기</a>
+          <a class="primary" href="#inquire/${m.id}">이걸로 탐구하기</a>
         </div>
       </article>`
     )
@@ -109,11 +109,11 @@ function openPlay(id, lesson) {
   show("play");
   const q = loadCard();
   modeTag.textContent = lesson
-    ? `2걸음 · 세기${q.id ? ` · ${q.id}` : ""}`
+    ? `2걸음 · 탐구하기${q.id ? ` · ${q.id}` : ""}`
     : "해 보기 · 규칙만 만지기";
   toLesson.hidden = lesson;
   toLesson.href = `#inquire/${id}`;
-  toLesson.textContent = "이걸로 세기";
+  toLesson.textContent = "이걸로 탐구하기";
   toSheet.href = "#write";
   toSheet.textContent = "쓰기로";
   stage.replaceChildren();

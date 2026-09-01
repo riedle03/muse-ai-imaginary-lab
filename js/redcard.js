@@ -93,7 +93,7 @@ export function renderAsk(root, onIssued) {
       go = document.createElement("a");
       go.id = "rc-go";
       go.className = "btn primary";
-      go.textContent = "세러 가기";
+      go.textContent = "탐구하러 가기";
       root.querySelector("#rc-make").after(go);
     }
     go.href = `#inquire/${next.game}`;
