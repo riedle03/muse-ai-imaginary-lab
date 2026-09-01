@@ -2,9 +2,9 @@
 
 국립중앙과학관 IMAGINARY 키오스크 4게임을 **체험 → 수업 → 학습지 → 산출**까지 한 웹앱에서 돌립니다. 안내 영상 5편과 한글 학습지·지도안이 같이 있습니다.
 
-로컬: `python -m http.server 8765` 후 http://127.0.0.1:8765
+교실: https://riedle03.github.io/muse-ai-imaginary-lab/
 
-교실 URL은 GitHub Pages에 올리면 README 맨 위에 적습니다.
+로컬: `python -m http.server 8765` 후 http://127.0.0.1:8765
 
 ## 동선
 | 주소 | 용도 |
