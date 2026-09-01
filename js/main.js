@@ -43,18 +43,24 @@ function show(view) {
   document.body.dataset.view = view;
 }
 
+const BOARD_LINE = {
+  rush: "지금 움직일 수 있는 차를 셉니다",
+  solitaire: "점프할 때마다 식을 봅니다",
+  fifteen: "밀 때마다 역전을 셉니다",
+  sudoku: "칸을 고르면 후보가 뜹니다",
+};
+
 function renderHub() {
   const card = loadCard();
   const games = listModules()
     .map(
       (m) => `
       <article class="station station-card">
-        <span class="st-no">${m.title}</span>
         <span class="mini mini-${m.id === "fifteen" ? "fif" : m.id === "sudoku" ? "sdk" : m.id === "solitaire" ? "sol" : "rush"}"></span>
         <strong>${m.title}</strong>
-        <em>${m.concept}</em>
+        <em>${BOARD_LINE[m.id] || m.concept}</em>
         <div class="cta-row">
-          <a href="#free/${m.id}">해 보기</a>
+          <a href="#free/${m.id}">규칙만</a>
           <a class="primary" href="#inquire/${m.id}">이걸로 세기</a>
         </div>
       </article>`
@@ -65,20 +71,42 @@ function renderHub() {
   if (pathHint && card.id) pathHint.textContent = `지금 카드 ${card.id}. 모둠 질문을 한 줄로 남깁니다.`;
 }
 
+function applyTeacherChrome() {
+  const teacher = lab.isTeacher();
+  const lesson = current.view === "lesson";
+  document.body.classList.toggle("is-teacher", teacher);
+  document.body.classList.toggle("is-free", !lesson || !teacher);
+  labSteps.hidden = !lesson || !teacher;
+  labAside.hidden = !lesson || !teacher;
+  const hint = document.querySelector("#btn-hint");
+  if (hint) hint.hidden = !teacher;
+  const strip = document.querySelector("#ask-strip");
+  if (strip) {
+    const q = loadCard();
+    if (lesson) {
+      strip.hidden = false;
+      strip.textContent = q.picked
+        ? `우리 질문 · ${q.id || "카드"} · ${q.picked}`
+        : "레드카드에 모둠 질문을 먼저 남기세요.";
+    } else {
+      strip.hidden = true;
+    }
+  }
+  if (lesson && teacher && session) lab.attach(current.id, session);
+}
+
 function openPlay(id, lesson) {
   if (!mounts[id]) return;
   session?.destroy();
   current = { view: lesson ? "lesson" : "free", id };
   show("play");
-  document.body.classList.toggle("is-free", !lesson);
   const q = loadCard();
   modeTag.textContent = lesson
-    ? `탐구하기 · ${q.picked || "레드카드 질문을 먼저 남기세요"}`
-    : "체험 · 규칙만 만지기";
-  labSteps.hidden = !lesson;
-  labAside.hidden = !lesson;
+    ? `2걸음 · 세기${q.id ? ` · ${q.id}` : ""}`
+    : "해 보기 · 규칙만 만지기";
   toLesson.hidden = lesson;
-  toLesson.href = `#lesson/${id}`;
+  toLesson.href = `#inquire/${id}`;
+  toLesson.textContent = "이걸로 세기";
   toSheet.href = "#write";
   toSheet.textContent = "쓰기로";
   stage.replaceChildren();
@@ -89,10 +117,10 @@ function openPlay(id, lesson) {
     onStatus(state) {
       stat.textContent = state.label || "";
       if (meter) meter.textContent = state.label || "—";
-      if (lesson) lab.onState(state);
+      if (lesson && lab.isTeacher()) lab.onState(state);
     },
   });
-  if (lesson) lab.attach(id, session);
+  applyTeacherChrome();
 }
 
 function openSheet(id) {
@@ -237,9 +265,9 @@ document.querySelector("#btn-hint")?.addEventListener("click", () => session?.hi
 document.querySelector("#teacher")?.addEventListener("click", () => {
   const next = !lab.isTeacher();
   lab.setTeacher(next);
-  document.body.classList.toggle("is-teacher", next);
   document.querySelector("#teacher").classList.toggle("is-on", next);
   document.querySelector("#teacher").textContent = next ? "교사 잠금 해제됨" : "교사";
+  applyTeacherChrome();
 });
 lab.setTeacher(false);
 
