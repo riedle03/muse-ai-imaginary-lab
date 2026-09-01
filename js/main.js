@@ -237,6 +237,7 @@ document.querySelector("#btn-hint")?.addEventListener("click", () => session?.hi
 document.querySelector("#teacher")?.addEventListener("click", () => {
   const next = !lab.isTeacher();
   lab.setTeacher(next);
+  document.body.classList.toggle("is-teacher", next);
   document.querySelector("#teacher").classList.toggle("is-on", next);
   document.querySelector("#teacher").textContent = next ? "교사 잠금 해제됨" : "교사";
 });
