@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>이매지너리 수학 실험실 · 고등</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/app.css" />
+  </head>
+  <body data-view="hub">
+    <div class="grain no-print" aria-hidden="true"></div>
+    <header class="top no-print">
+      <a class="brand" href="#hub" id="to-hub">
+        <span class="ticket">실</span>
+        <span>
+          <strong>이매지너리 수학 실험실</strong>
+          <small>고등 · 체험부터 산출까지 · MUSE-AI</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="앱 구역">
+        <a href="#hub">처음</a>
+        <a href="#sheet">학습지</a>
+        <a href="#guide">지도안</a>
+        <a href="#video">안내 영상</a>
+      </nav>
+      <div class="top-right">
+        <button type="button" id="teacher" class="ghost">교사</button>
+      </div>
+    </header>
+
+    <section id="hub" class="hub">
+      <p class="hall-kicker">
+        한 모듈이 한 차시입니다. <strong>체험</strong>으로 규칙을 만져 보고,
+        <strong>수업</strong>에서 숫자를 모으고, <strong>학습지</strong>에 남깁니다. 안내 영상은 수업 시작 전에 한 번 틀면 됩니다.
+      </p>
+      <div id="cards" class="stations"></div>
+    </section>
+
+    <section id="play" class="play lab-play" hidden>
+      <div class="stage-col">
+        <p id="mode-tag" class="mode-tag no-print">수업</p>
+        <nav id="lab-steps" class="lab-steps no-print" aria-label="수업 단계"></nav>
+        <div class="hud no-print">
+          <p id="stat">—</p>
+          <div class="hud-actions">
+            <button type="button" id="btn-reset">보드 처음</button>
+            <button type="button" id="btn-hint" hidden>힌트</button>
+            <a id="to-lesson" class="ghost" hidden>이 판으로 수업</a>
+            <a id="to-sheet" class="ghost">학습지</a>
+          </div>
+        </div>
+        <p id="meter" class="meter no-print">—</p>
+        <div id="stage" class="stage"></div>
+      </div>
+      <aside class="plaque lab no-print" id="lab-body"></aside>
+    </section>
+
+    <section id="sheet-view" class="paper-view" hidden>
+      <div class="paper-bar no-print">
+        <select id="sheet-mod"></select>
+        <button type="button" id="sheet-print">인쇄 / PDF</button>
+        <a id="sheet-play" class="ghost">보드로</a>
+      </div>
+      <div id="sheet-root"></div>
+    </section>
+
+    <section id="guide-view" class="paper-view" hidden>
+      <div class="paper-bar no-print">
+        <button type="button" id="guide-print">인쇄 / PDF</button>
+      </div>
+      <div id="guide-root"></div>
+    </section>
+
+    <section id="video-view" class="video-view" hidden>
+      <div class="film-pick no-print" id="film-pick"></div>
+      <div class="film-stage" id="film-stage">
+        <p class="film-kicker" id="film-kicker"></p>
+        <h1 id="film-line"></h1>
+        <p class="film-cap" id="film-cap"></p>
+      </div>
+      <div class="film-ctrl no-print">
+        <button type="button" id="film-prev">이전</button>
+        <button type="button" id="film-play">재생</button>
+        <button type="button" id="film-next">다음</button>
+        <span id="film-pos"></span>
+      </div>
+      <div id="film-files" class="film-files"></div>
+    </section>
+
+    <footer class="foot no-print">
+      MUSE-AI 고등 · 체험 → 수업 → 학습지 → 산출 · 정답기 금지
+    </footer>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

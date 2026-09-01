@@ -1,0 +1,6 @@
+_shots/
+media/frames/
+__pycache__/
+*.pyc
+.omc/
+print/_section0.xml

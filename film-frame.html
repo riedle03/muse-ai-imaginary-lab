@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>film frame</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600&family=Syne:wght@800&display=swap" rel="stylesheet" />
+    <style>
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #0a0e14; color: #f3efe4; font-family: "IBM Plex Sans KR", sans-serif; }
+      .stage { width: 1920px; height: 1080px; display: grid; place-content: center; text-align: center; gap: 28px; padding: 80px; box-sizing: border-box;
+        background: radial-gradient(900px 420px at 50% 0%, #1a2433, #0a0e14 70%); }
+      .k { letter-spacing: 0.28em; color: #d4b483; font-size: 22px; margin: 0; }
+      h1 { font-family: "IBM Plex Sans KR", Syne, sans-serif; font-size: 84px; margin: 0; line-height: 1.15; font-weight: 600; }
+      .c { font-size: 32px; color: #8b93a7; margin: 0 auto; max-width: 18em; line-height: 1.45; }
+      .foot { position: absolute; bottom: 48px; left: 64px; right: 64px; display: flex; justify-content: space-between; color: #8a7349; font-size: 18px; }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <p class="k" id="k"></p>
+      <h1 id="l"></h1>
+      <p class="c" id="c"></p>
+    </div>
+    <p class="foot"><span>이매지너리 수학 실험실</span><span id="who"></span></p>
+    <script type="module">
+      import { FILMS } from "./js/films.js";
+      const q = new URLSearchParams(location.search);
+      const film = FILMS[q.get("film") || "teacher"];
+      const i = Number(q.get("i") || 0);
+      const sc = film.scenes[i];
+      document.getElementById("k").textContent = sc.kicker;
+      document.getElementById("l").textContent = sc.line;
+      document.getElementById("c").textContent = sc.cap;
+      document.getElementById("who").textContent = film.who + " · " + film.title;
+    </script>
+  </body>
+</html>
