@@ -104,8 +104,8 @@ body > section { width: 100%; min-width: 0; }
   background: linear-gradient(180deg, var(--cyan-soft), var(--card));
 }
 .hero-copy .pet {
-  width: 120px;
-  height: 180px;
+  width: 140px;
+  height: 220px;
   object-fit: contain;
 }
 .hero-copy .eyebrow { margin: 0; font-weight: 700; color: var(--cyan); font-size: 16px; }
