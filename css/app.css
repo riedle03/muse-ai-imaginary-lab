@@ -339,16 +339,35 @@ button {
   color: var(--mist);
   font-size: 16px;
   display: flex;
-  gap: 14px;
+  gap: 16px 24px;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   background: var(--card);
   border-top: 2px solid var(--ink);
+}
+.foot-left {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  min-width: 0;
 }
 .foot .pet { width: 40px; height: 56px; object-fit: contain; flex-shrink: 0; }
 .foot .who { display: grid; gap: 2px; }
 .foot strong { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; }
 .foot .org { margin: 0; font-size: 16px; font-weight: 700; color: var(--ink); }
 .foot small { color: var(--mist); font-size: 14px; font-weight: 600; }
+.foot .nsm {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.foot .nsm img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
 .hidden { display: none !important; }
 
 .rush-wrap { display: grid; gap: 12px; justify-items: center; }
