@@ -41,9 +41,9 @@ export function renderAsk(root, onIssued) {
   const c = loadCard();
   root.innerHTML = `
     <article class="a4 red-sheet">
-      <p class="meta">1걸음 · 질문 남기기</p>
-      <h1>질문을 한 줄로 남깁니다</h1>
-      <p>먼저 나만의 질문을 씁니다. 모둠이 하나를 고르면, 그 한 줄이 레드카드가 됩니다.</p>
+      <p class="meta">1차시 · 질문하기</p>
+      <h1>탐구질문카드</h1>
+      <p>먼저 나만의 탐구질문을 씁니다. 모둠이 하나를 고르면, 그 한 줄이 탐구질문카드가 됩니다.</p>
       <label>모둠 이름 <input id="rc-group" value="${c.group}" /></label>
       <label>내 이름 <input id="rc-names" value="${c.names}" /></label>
       <label>내가 만든 질문
@@ -65,8 +65,8 @@ export function renderAsk(root, onIssued) {
         </select>
       </label>
       <p class="card-id">카드 번호: <strong id="rc-id">${c.id || "아직 없음"}</strong></p>
-      <button type="button" class="next" id="rc-make">레드카드 만들기</button>
-      <p class="hint-mute">카드를 만들면 2걸음에서 그 놀이의 미터를 셉니다.</p>
+      <button type="button" class="next" id="rc-make">탐구질문카드 만들기</button>
+      <p class="hint-mute">카드를 만들면 탐구하기에서 그 놀이의 미터를 셉니다.</p>
     </article>
   `;
   const read = () => ({

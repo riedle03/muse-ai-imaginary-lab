@@ -90,7 +90,7 @@ function applyTeacherChrome() {
       strip.hidden = false;
       strip.textContent = q.picked
         ? `우리 질문 · ${q.id || "카드"} · ${q.picked}`
-        : "레드카드에 모둠 질문을 먼저 남기세요.";
+        : "탐구질문카드에 모둠 질문을 먼저 남기세요.";
     } else {
       strip.hidden = true;
     }

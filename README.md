@@ -5,7 +5,7 @@
 교실: https://muse-ai-imaginary-lab.vercel.app/  
 (GitHub Pages 백업: https://riedle03.github.io/muse-ai-imaginary-lab/)
 
-3차시: `#ask` 질문하기(레드카드) → `#inquire` 탐구하기(미터) → `#write` 쓰기(종이 3장). 사진 IMG_8957–8968.
+3차시: `#ask` 질문하기(탐구질문카드) → `#inquire` 탐구하기(미터) → `#write` 쓰기(종이 3장). 사진 IMG_8957–8968.
 
 로컬: `python -m http.server 8765` 후 http://127.0.0.1:8765
 
