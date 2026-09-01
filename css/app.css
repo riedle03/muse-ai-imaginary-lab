@@ -69,10 +69,16 @@ body {
 }
 .stations {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   padding: 0 28px 40px;
 }
+#ask-view { padding: 12px 24px 40px; }
+#ask-view label { display: grid; gap: 6px; margin: 10px 0; }
+#ask-view input, #ask-view textarea, #ask-view select {
+  font: inherit; width: 100%; padding: 8px; border: 1px solid #c4a574; background: #fffaf0;
+}
+.card-id { font-size: 18px; }
 .station {
   appearance: none;
   background: linear-gradient(180deg, #18202c, #10161f);

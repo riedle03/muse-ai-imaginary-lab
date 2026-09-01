@@ -19,15 +19,15 @@
         <span class="ticket">실</span>
         <span>
           <strong>이매지너리 수학 실험실</strong>
-          <small>고등 · 체험부터 산출까지 · MUSE-AI</small>
+          <small>질문하기 · 탐구하기 · 쓰기</small>
         </span>
       </a>
       <nav class="main-nav" aria-label="앱 구역">
         <a href="#hub">처음</a>
-        <a href="#sheet">학습지</a>
+        <a href="#ask">질문하기</a>
+        <a href="#inquire">탐구하기</a>
+        <a href="#write">쓰기</a>
         <a href="#guide">지도안</a>
-        <a href="#video">안내 영상</a>
-        <a href="./school/">초·중·고</a>
       </nav>
       <div class="top-right">
         <button type="button" id="teacher" class="ghost">교사</button>
@@ -36,9 +36,9 @@
 
     <section id="hub" class="hub">
       <p class="hall-kicker">
-        한 모듈이 한 차시입니다. <strong>체험</strong>으로 규칙을 만져 보고,
-        <strong>수업</strong>에서 숫자를 모으고, <strong>학습지</strong>에 남깁니다. 안내 영상은 수업 시작 전에 한 번 틀면 됩니다.
-        초·중·고 본 프로그램(스마트시티·화석·데이터)은 <a href="./school/">이쪽</a>입니다.
+        국립중앙과학관 이매지너리 키오스크입니다. <strong>질문하기</strong>에서 모둠 탐구질문을 레드카드에 남기고,
+        <strong>탐구하기</strong>에서 고른 게임을 미터로 세고, <strong>쓰기</strong>는 종이 3장입니다.
+        과학관에 못 가도 웹앱만으로 3차시가 됩니다.
       </p>
       <div id="cards" class="stations"></div>
     </section>
@@ -60,6 +60,10 @@
         <div id="stage" class="stage"></div>
       </div>
       <aside class="plaque lab no-print" id="lab-body"></aside>
+    </section>
+
+    <section id="ask-view" class="paper-view" hidden>
+      <div id="ask-root"></div>
     </section>
 
     <section id="sheet-view" class="paper-view" hidden>
@@ -95,7 +99,7 @@
     </section>
 
     <footer class="foot no-print">
-      MUSE-AI 고등 · 체험 → 수업 → 학습지 → 산출 · 정답기 금지
+      MUSE-AI · 질문하기 → 탐구하기 → 쓰기 · 보드는 1차 자료
     </footer>
     <script type="module" src="./js/main.js"></script>
   </body>

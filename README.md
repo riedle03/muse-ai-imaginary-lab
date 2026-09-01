@@ -4,7 +4,7 @@
 
 교실: https://riedle03.github.io/muse-ai-imaginary-lab/
 
-초·중·고 본 프로그램(12차시): https://riedle03.github.io/muse-ai-imaginary-lab/school/
+3차시: `#ask` 질문하기(레드카드) → `#inquire` 탐구하기(미터) → `#write` 쓰기(종이 3장). 사진 IMG_8957–8968.
 
 로컬: `python -m http.server 8765` 후 http://127.0.0.1:8765
 

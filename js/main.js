@@ -1,6 +1,8 @@
 import { listModules, MODULES } from "./lessons.js";
 import { createLab } from "./lab.js";
 import { renderSheet, renderGuide } from "./sheets.js";
+import { renderCycleSheets, renderCycleGuide } from "./cycle-sheets.js";
+import { renderAsk, loadCard } from "./redcard.js";
 import { FILMS, listFilms } from "./films.js";
 import { mountRush } from "./games/rush.js";
 import { mountSolitaire } from "./games/solitaire.js";
@@ -11,6 +13,7 @@ const mounts = { rush: mountRush, solitaire: mountSolitaire, fifteen: mountFifte
 const views = {
   hub: document.querySelector("#hub"),
   play: document.querySelector("#play"),
+  ask: document.querySelector("#ask-view"),
   sheet: document.querySelector("#sheet-view"),
   guide: document.querySelector("#guide-view"),
   video: document.querySelector("#video-view"),
@@ -41,25 +44,45 @@ function show(view) {
 }
 
 function renderHub() {
-  const cards = document.querySelector("#cards");
-  cards.innerHTML = listModules()
+  const card = loadCard();
+  const periods = `
+    <article class="station">
+      <span class="st-no">1차시</span>
+      <strong>질문하기</strong>
+      <em>개인 질문 → 모둠 확정 → 레드카드</em>
+      <p>카드에는 탐구질문 한 줄만 남습니다.${card.id ? ` 지금 카드 ${card.id}` : ""}</p>
+      <div class="cta-row"><a href="#ask">레드카드 만들기</a></div>
+    </article>
+    <article class="station">
+      <span class="st-no">2차시</span>
+      <strong>탐구하기</strong>
+      <em>고른 게임을 미터로 센다</em>
+      <p>깨기가 목적이 아닙니다. 교실 웹앱만으로도 됩니다.</p>
+      <div class="cta-row"><a href="#inquire">탐구 보드</a></div>
+    </article>
+    <article class="station">
+      <span class="st-no">3차시</span>
+      <strong>쓰기</strong>
+      <em>종이 활동지 3장</em>
+      <p>질문 · 잰 숫자 · 한 문장. 인쇄하세요.</p>
+      <div class="cta-row"><a href="#write">활동지 열기</a></div>
+    </article>`;
+  const games = listModules()
     .map(
       (m) => `
       <article class="station station-card">
-        <span class="st-no">${m.rec ? "추천 1차시" : `${m.minutes}분`}</span>
+        <span class="st-no">${m.title}</span>
         <span class="mini mini-${m.id === "fifteen" ? "fif" : m.id === "sudoku" ? "sdk" : m.id === "solitaire" ? "sol" : "rush"}"></span>
         <strong>${m.title}</strong>
         <em>${m.concept}</em>
-        <span class="subj">${m.subject} · ${m.minutes}분</span>
         <div class="cta-row">
           <a href="#free/${m.id}">체험</a>
-          <a href="#lesson/${m.id}">수업</a>
-          <a href="#sheet/${m.id}">학습지</a>
-          <a href="#video/${m.id}">안내</a>
+          <a href="#inquire/${m.id}">이 게임으로 탐구</a>
         </div>
       </article>`
     )
     .join("");
+  document.querySelector("#cards").innerHTML = periods + games;
 }
 
 function openPlay(id, lesson) {
@@ -68,12 +91,16 @@ function openPlay(id, lesson) {
   current = { view: lesson ? "lesson" : "free", id };
   show("play");
   document.body.classList.toggle("is-free", !lesson);
-  modeTag.textContent = lesson ? "수업 · 관찰이 데이터" : "체험 · 규칙만 만지기";
+  const q = loadCard();
+  modeTag.textContent = lesson
+    ? `탐구하기 · ${q.picked || "레드카드 질문을 먼저 남기세요"}`
+    : "체험 · 규칙만 만지기";
   labSteps.hidden = !lesson;
   labAside.hidden = !lesson;
   toLesson.hidden = lesson;
   toLesson.href = `#lesson/${id}`;
-  toSheet.href = `#sheet/${id}`;
+  toSheet.href = "#write";
+  toSheet.textContent = "쓰기로";
   stage.replaceChildren();
   const meter = document.querySelector("#meter");
   if (meter) meter.textContent = "—";
@@ -101,12 +128,34 @@ function openSheet(id) {
   document.querySelector("#sheet-play").href = `#lesson/${id}`;
 }
 
+function openAsk() {
+  session?.destroy();
+  session = null;
+  current = { view: "ask", id: "" };
+  show("ask");
+  renderAsk(document.querySelector("#ask-root"), () => {});
+}
+
+function openInquire(id) {
+  const card = loadCard();
+  const gid = mounts[id] ? id : card.game && mounts[card.game] ? card.game : "rush";
+  openPlay(gid, true);
+}
+
+function openWrite() {
+  session?.destroy();
+  session = null;
+  current = { view: "write", id: "" };
+  show("sheet");
+  renderCycleSheets(document.querySelector("#sheet-root"));
+}
+
 function openGuide() {
   session?.destroy();
   session = null;
   current = { view: "guide", id: "" };
   show("guide");
-  renderGuide(document.querySelector("#guide-root"));
+  renderCycleGuide(document.querySelector("#guide-root"));
 }
 
 let filmId = "teacher";
@@ -184,16 +233,19 @@ function openVideo(id) {
 function route() {
   const raw = location.hash.replace(/^#/, "");
   const [view, id] = raw.split("/");
+  if (view === "ask") return openAsk();
+  if (view === "inquire") return openInquire(id);
+  if (view === "write" || view === "sheet") return openWrite();
   if (view === "free" && mounts[id]) return openPlay(id, false);
   if (view === "lesson" && mounts[id]) return openPlay(id, true);
-  if (view === "sheet") return openSheet(id && MODULES[id] ? id : "fifteen");
   if (view === "guide") return openGuide();
   if (view === "video") return openVideo(id || "teacher");
-  if (mounts[view] && !id) return openPlay(view, true);
+  if (mounts[view] && !id) return openInquire(view);
   session?.destroy();
   session = null;
   current = { view: "hub", id: "" };
   show("hub");
+  renderHub();
 }
 
 document.querySelector("#to-hub")?.addEventListener("click", (event) => {
