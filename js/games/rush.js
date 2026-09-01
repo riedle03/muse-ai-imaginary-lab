@@ -15,6 +15,33 @@ const COLORS = {
   J: "#86b0d4",
 };
 
+const SEDAN = {
+  R: "assets/cars/sedan-red.png",
+  A: "assets/cars/sedan-blue.png",
+  B: "assets/cars/sedan-yellow.png",
+  C: "assets/cars/sedan-green.png",
+  D: "assets/cars/sedan-purple.png",
+  E: "assets/cars/sedan-orange.png",
+  F: "assets/cars/sedan-white.png",
+  G: "assets/cars/sedan-teal.png",
+  H: "assets/cars/sedan-pink.png",
+  I: "assets/cars/sedan-gray.png",
+  J: "assets/cars/sedan-sky.png",
+};
+
+const TRUCK = {
+  A: "assets/cars/truck-blue.png",
+  C: "assets/cars/truck-green.png",
+  D: "assets/cars/truck-purple.png",
+  F: "assets/cars/truck-white.png",
+  G: "assets/cars/truck-teal.png",
+};
+
+export function spriteFor(car) {
+  if (car.len >= 3) return TRUCK[car.id] || TRUCK.A;
+  return SEDAN[car.id] || SEDAN.A;
+}
+
 /** @typedef {{id:string,color:string,len:number,r:number,c:number,axis:'h'|'v',target?:boolean}} Car */
 
 export const LEVELS = [
@@ -356,7 +383,12 @@ export function mountRush(root, { onStatus, lessonMode = false } = {}) {
       el.dataset.id = car.id;
       el.setAttribute("aria-label", `${car.target ? "빨간 차" : "차"} ${car.id}`);
       if (selected === car.id) el.classList.add("is-on");
-      el.innerHTML = `<span class="car-glass"></span><span class="car-wheel a"></span><span class="car-wheel b"></span>`;
+      const img = document.createElement("img");
+      img.className = "sprite";
+      img.src = spriteFor(car);
+      img.alt = "";
+      img.draggable = false;
+      el.append(img);
       lot.append(el);
     }
     banner.classList.toggle("hidden", !isWon(cars));

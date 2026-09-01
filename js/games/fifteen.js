@@ -79,8 +79,8 @@ export function mountFifteen(root, { onStatus, lessonMode = false } = {}) {
     </div>
     ${lessonMode ? "" : `<div class="skin-row">
       <button type="button" class="skin is-on" data-skin="num">숫자</button>
-      <button type="button" class="skin" data-skin="glass">유리화</button>
-      <button type="button" class="skin" data-skin="geo">격자</button>
+      <button type="button" class="skin" data-skin="glass">유리</button>
+      <button type="button" class="skin" data-skin="geo">해바라기</button>
     </div>`}
     <div class="fif-board" role="application" aria-label="15퍼즐"></div>
     <p class="fif-win hidden">맞춰졌습니다. 이 배치는 짝순열입니다.</p>
